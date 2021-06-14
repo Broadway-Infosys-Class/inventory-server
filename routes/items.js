@@ -10,14 +10,14 @@ const {
   deleteItemById,
 } = require("../controllers/items");
 
-router.get("/item", getAllItems);
+router.get("/", getAllItems);
 
-router.post("/item", addItem);
+router.post("/", addItem);
 
-router.get("/item/:id", getItemById);
+router.get("/:id", getItemById);
 
-router.patch("/item/:id", editItemById);
+router.patch("/:id", editItemById);
 
-router.delete("/item/:id", deleteItemById);
+router.delete("/:id", deleteItemById);
 
 module.exports = router;
