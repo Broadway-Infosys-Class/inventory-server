@@ -20,6 +20,9 @@ connectionRef.on("open", () => {
 const itemRoutes = require("./routes/items");
 app.use("/api/item", itemRoutes);
 
+const statusRoutes = require("./routes/status");
+app.use("/api/status", statusRoutes);
+
 app.listen(port, () => {
   console.log("server listening to port ", port);
 });
