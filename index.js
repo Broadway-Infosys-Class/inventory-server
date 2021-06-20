@@ -23,6 +23,9 @@ app.use("/api/item", itemRoutes);
 const statusRoutes = require("./routes/status");
 app.use("/api/status", statusRoutes);
 
+const userRoutes = require("./routes/users");
+app.use("/api/user", userRoutes);
+
 app.listen(port, () => {
   console.log("server listening to port ", port);
 });
