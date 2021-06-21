@@ -10,9 +10,11 @@ const {
   deleteItemById,
 } = require("../controllers/items");
 
-router.get("/", getAllItems);
+const { verifyToken } = require("../middlewares/verifyToken");
 
-router.post("/", addItem);
+router.get("/", verifyToken, getAllItems);
+
+router.post("/", verifyToken, addItem);
 
 router.get("/:id", getItemById);
 
