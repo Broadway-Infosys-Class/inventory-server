@@ -26,6 +26,9 @@ app.use("/api/status", statusRoutes);
 const userRoutes = require("./routes/users");
 app.use("/api/user", userRoutes);
 
+const billRoutes = require("./routes/bills");
+app.use("/api/bills", billRoutes);
+
 app.listen(port, () => {
   console.log("server listening to port ", port);
 });
