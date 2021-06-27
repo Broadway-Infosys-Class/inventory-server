@@ -31,3 +31,24 @@ exports.addBills = async (req, res) => {
     });
   }
 };
+
+exports.getBills = async (req, res) => {
+  try {
+    const bills = await Bill.find();
+    let newBills = bills;
+    let temp = [];
+    newBills.map((bill, index) => {
+      let tempBill = bill;
+      let newBill = { ...tempBill, itemName: "Test" };
+      console.log(newBill);
+      temp.push(newBill);
+    });
+    res.json({
+      bills: newBills,
+    });
+  } catch (err) {
+    res.json({
+      error: err,
+    });
+  }
+};
