@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const Item = require("./item");
 
 const billSchema = new mongoose.Schema({
   billNo: {
@@ -9,9 +10,10 @@ const billSchema = new mongoose.Schema({
     required: true,
     type: String,
   },
-  item: {
+  itemId: {
     required: true,
-    type: String,
+    type: mongoose.Schema.ObjectId,
+    ref: "item",
   },
   quantity: {
     required: true,

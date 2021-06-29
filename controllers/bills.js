@@ -1,24 +1,28 @@
+const mongoose = require("mongoose");
 const Bill = require("../models/bill");
 const Item = require("../models/item");
 
 exports.addBills = async (req, res) => {
-  const { billNo, vendor, item, quantity } = req.body;
+  const { billNo, vendor, itemId, quantity } = req.body;
+
   const newBill = new Bill({
     billNo,
     vendor,
-    item,
+    itemId,
     quantity,
   });
   try {
     const savedBill = await newBill.save();
-    const myItem = await Item.findById(item);
+    const myItem = await Item.findById(itemId);
     if (myItem) {
       myItem.quantity += quantity;
       const changedItem = await myItem.save();
       res.json({
         bill: savedBill,
-        item: changedItem.name,
-        newQuantity: changedItem.quantity,
+        itemDetail: {
+          item: changedItem.name,
+          newQuantity: changedItem.quantity,
+        },
       });
     } else {
       res.json({
@@ -34,17 +38,10 @@ exports.addBills = async (req, res) => {
 
 exports.getBills = async (req, res) => {
   try {
-    const bills = await Bill.find();
-    let newBills = bills;
-    let temp = [];
-    newBills.map((bill, index) => {
-      let tempBill = bill;
-      let newBill = { ...tempBill, itemName: "Test" };
-      console.log(newBill);
-      temp.push(newBill);
-    });
+    const bills = await Bill.find().populate("itemId");
+    // const newBills = await bills.populate("item").execPopulate();
     res.json({
-      bills: newBills,
+      bills: bills,
     });
   } catch (err) {
     res.json({
