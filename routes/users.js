@@ -44,7 +44,7 @@ router.post("/signin", async (req, res) => {
       });
     }
   } catch (err) {
-    res.json({
+    res.status(401).json({
       message: "User Not Found",
       error: err,
     });

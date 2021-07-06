@@ -12,9 +12,9 @@ const {
 
 const { verifyToken } = require("../middlewares/verifyToken");
 
-router.get("/", getAllItems);
+router.get("/", verifyToken, getAllItems);
 
-router.post("/", addItem);
+router.post("/", verifyToken, addItem);
 
 router.get("/:id", getItemById);
 
